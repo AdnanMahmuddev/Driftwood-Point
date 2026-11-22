@@ -1,0 +1,38 @@
+DRIFTWOOD POINT — shared hosting package
+========================================
+
+WHAT THIS IS
+  A fully built, static site. No Node, no server-side code, no database.
+  Just upload the files and open the domain.
+
+HOW TO UPLOAD (cPanel / File Manager)
+  1. Open File Manager -> public_html  (or public_html/any-subfolder).
+  2. Upload driftwood-point.zip, then use "Extract" in place.
+  3. Make sure index.html sits directly in public_html (not one folder deeper).
+  4. Visit your domain. Done.
+
+  If you extract into a subfolder like public_html/island/, it also works —
+  the build uses relative paths, so nothing is hard-wired to the domain root.
+
+FILES
+  index.html      the page (keep the name)
+  404.html        copy of the page, for hosts that use it for unknown paths
+  assets/         the compiled JS + CSS  (do not rename; hashes are in the names)
+  .htaccess       Apache config: SPA routing, gzip, cache headers
+  DEPLOY.txt      this file
+
+  No .htaccess? (some hosts hide or ignore it) — that only costs you gzip and
+  cache headers, the site still runs. If your host uses nginx or Netlify-style
+  hosting, delete .htaccess and use your panel's own settings.
+
+NOTES
+  - Needs a modern browser with WebGL 2 (Chrome, Edge, Firefox, Safari 15+).
+  - The two typefaces are pulled from Google Fonts; everything else is local.
+    If the host blocks external requests you still get a clean system-font
+    fallback, no broken layout.
+  - First load streams ~350 KB gzipped; after that it is cached for a year.
+  - Files are static, so there is nothing to configure, secure or update.
+
+REBUILDING FROM SOURCE
+  In the project folder:  npm install  &&  npm run build
+  Output lands in dist/ — copy its contents over these files.
